@@ -16,51 +16,52 @@ import java.util.List;
  * @author flu
  * 
  */
-public class PalindromePartitioning {	
-	public ArrayList<ArrayList<String>> partition(String s) {
-		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
-		if (s == null || s.isEmpty()) {
-			return result;
-		}
+public class PalindromePartitioning {
+    public ArrayList<ArrayList<String>> partition(String s) {
+        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+        if (s == null || s.isEmpty()) {
+            return result;
+        }
 
-		for (int i = 1; i < s.length(); i++) {
-			if (!isPalindrom(s.substring(0, i))) {
-				continue;
-			}
-			ArrayList<ArrayList<String>> subResult = partition(s.substring(i));
-			if (subResult != null) {
-				for (ArrayList<String> tmp : subResult) {
-					ArrayList<String> solution = new ArrayList<String>();
-					solution.add(s.substring(0, i));
-					solution.addAll(tmp);
-					result.add(solution);
-				}
-			}
-		}
+        for (int i = 1; i < s.length(); i++) {
+            if (!isPalindrom(s.substring(0, i))) {
+                continue;
+            }
+            ArrayList<ArrayList<String>> subResult = partition(s.substring(i));
+            if (subResult != null) {
+                for (ArrayList<String> tmp : subResult) {
+                    ArrayList<String> solution = new ArrayList<String>();
+                    solution.add(s.substring(0, i));
+                    solution.addAll(tmp);
+                    result.add(solution);
+                }
+            }
+        }
 
-		if (isPalindrom(s)) {
-			ArrayList<String> solution = new ArrayList<String>();
-			solution.add(s);
-			result.add(solution);
-		}
-		return result;
-	}
+        if (isPalindrom(s)) {
+            ArrayList<String> solution = new ArrayList<String>();
+            solution.add(s);
+            result.add(solution);
+        }
+        return result;
+    }
 
-	private boolean isPalindrom(String s) {		
-		// Use a hashmap might in theory speed up a bit.
-		 int i = 0, j = s.length() - 1; 
-		 while (i < j) 
-			 if (s.charAt(i++) != s.charAt(j--)) return false; 
-		 return true;
-	}
+    private boolean isPalindrom(String s) {
+        // Use a hashmap might in theory speed up a bit.
+        int i = 0, j = s.length() - 1;
+        while (i < j)
+            if (s.charAt(i++) != s.charAt(j--))
+                return false;
+        return true;
+    }
 
-	public static void main(String[] args) {
-		PalindromePartitioning p = new PalindromePartitioning();
-		String s = "aaba";
-		List<ArrayList<String>> r = p.partition(s);
+    public static void main(String[] args) {
+        PalindromePartitioning p = new PalindromePartitioning();
+        String s = "aaba";
+        List<ArrayList<String>> r = p.partition(s);
 
-		for (List<String> t : r) {
-			System.out.println(t);
-		}
-	}
+        for (List<String> t : r) {
+            System.out.println(t);
+        }
+    }
 }

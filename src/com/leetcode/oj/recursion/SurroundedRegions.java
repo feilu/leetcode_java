@@ -3,9 +3,6 @@ package com.leetcode.oj.recursion;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
-
 /**
  * Given a 2D board containing 'X' and 'O', capture all regions surrounded by
  * 'X'. A region is captured by flipping all 'O's into 'X's in that surrounded
@@ -16,11 +13,10 @@ X O O X
 X X O X
 X O X X
 After running your function, the board should be:
-
 X X X X
 X X X X
 X X X X
-X O X X
+X O X X  
 
 DFS all 'O' on edges to find connected 'O' and mark them as '+'. After the scan any 'O' left
 should be replaced by 'X' (and return '+' back to 'O').
@@ -84,7 +80,7 @@ public class SurroundedRegions {
 			
 			if (c.y + 1 < n && board[c.x][c.y + 1] == 'O' && !set.contains(new Cordinate(c.x, c.y + 1)))
 				set.add(new Cordinate(c.x, c.y + 1));							
-		}		
+		}		 
 	}
 	
 	private class Cordinate {
