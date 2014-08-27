@@ -37,6 +37,7 @@ public class BinaryTreeSerializationDfs {
         return deserializeDfsRec(q);
     }
 
+    // pre-order serialization
     private TreeNode deserializeDfsRec(Queue<String> q) {
         String v = q.poll();
         if (v.trim().equals("#")) {

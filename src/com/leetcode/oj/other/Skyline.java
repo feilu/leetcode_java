@@ -1,4 +1,4 @@
-package com.leetcode.oj.recursion;
+package com.leetcode.oj.other;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +47,9 @@ public class Skyline {
         if (null == rects)
             return;
         
+        // to remove point from treemap when reaching the end of a rectangle.
         Map<Point, Point> map = new HashMap<Point, Point>();
+
         List<Point> points = new ArrayList<Point>();
         for (Rect rect : rects)
         {
@@ -55,7 +57,8 @@ public class Skyline {
             Point e = new Point(false, rect.rgt, rect.height);
             points.add(s);
             points.add(e);
-            map.put(e, s);
+
+            map.put(e, s); // add point to map, keyed by end coordinate, use to remove from tree set later.
         }
         
         Collections.sort(points, new Comparator<Point>() {
