@@ -24,6 +24,20 @@ public class BinaryTreeSerializationDfs {
         return res.toString();
     }
 
+    /*
+     * DFS serialization. in order.
+     */
+    private void serializerRec(TreeNode root, StringBuilder res) {
+        if (root == null) {
+            res.append("# ");
+            return;
+        }
+
+        res.append(root.val + " ");
+        serializerRec(root.left, res);
+        serializerRec(root.right, res);
+    }
+
     public TreeNode deserializeDfs(String s) {
         if (Strings.isNullOrEmpty(s)) {
             return null;
@@ -48,20 +62,6 @@ public class BinaryTreeSerializationDfs {
         n.left = deserializeDfsRec(q);
         n.right = deserializeDfsRec(q);
         return n;
-    }
-
-    /*
-     * DFS serialization.
-     */
-    private void serializerRec(TreeNode root, StringBuilder res) {
-        if (root == null) {
-            res.append("# ");
-            return;
-        }
-
-        res.append(root.val + " ");
-        serializerRec(root.left, res);
-        serializerRec(root.right, res);
     }
 
     public static void main(String[] args) {

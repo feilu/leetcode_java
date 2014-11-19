@@ -1,8 +1,8 @@
 package com.leetcode.oj.binarytree;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class BstInOrderIterator implements Iterator<TreeNode> {
@@ -10,7 +10,7 @@ public class BstInOrderIterator implements Iterator<TreeNode> {
     private Deque<TreeNode> stack;
 
     public BstInOrderIterator(TreeNode root) {
-        stack = new LinkedList<TreeNode>();
+        stack = new ArrayDeque<TreeNode>();
         pushLeft(root);
     }
 
