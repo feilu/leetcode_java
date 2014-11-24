@@ -3,44 +3,43 @@ package com.leetcode.oj.binarytree;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
-public class BstInOrderIterator implements Iterator<TreeNode> {
-
+public class BinaryTreePreOrderIterator implements Iterator<TreeNode> {
     private Deque<TreeNode> stack;
+    private TreeNode current;
 
-    public BstInOrderIterator(TreeNode root) {
-        stack = new ArrayDeque<TreeNode>();
-        pushLeft(root);
+    public BinaryTreePreOrderIterator(TreeNode root) {
+        this.stack = new ArrayDeque<>();
+        this.current = root;
     }
 
     @Override
     public boolean hasNext() {
-        return stack.size() > 0;
+        return stack.size() > 0 || current != null;
     }
 
     @Override
     public TreeNode next() {
-        if (stack.size() == 0) {
-            throw new NoSuchElementException();
-        }
+        TreeNode node = null;
+        while (hasNext()) {
+            if (current != null) {
+                node = current;
 
-        TreeNode node = stack.pop();
-        pushLeft(node.right);
+                if (current.right != null)
+                    stack.push(current.right);
+
+                current = current.left;
+                break;
+            } else {
+                current = stack.pop();
+            }
+        }
         return node;
     }
 
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
-    }
-
-    private void pushLeft(TreeNode node) {
-        // find left most leaf, store nodes in the middle.
-        while (node != null) {
-            stack.push(node);
-            node = node.left;
-        }
     }
 
     public static void main(String[] args) {
@@ -53,11 +52,12 @@ public class BstInOrderIterator implements Iterator<TreeNode> {
         n.left = a;
         n.right = b;
         a.left = c;
-        b.right = d;
+        a.right = d;
 
-        BstInOrderIterator iter = new BstInOrderIterator(n);
+        BinaryTreePreOrderIterator iter = new BinaryTreePreOrderIterator(n);
         while (iter.hasNext()) {
             System.out.println(iter.next());
         }
     }
+
 }

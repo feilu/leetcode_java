@@ -1,4 +1,4 @@
-package com.leetcode.oj.bsf;
+package com.leetcode.oj.bfs;
 
 import java.util.LinkedList;
 import java.util.List;

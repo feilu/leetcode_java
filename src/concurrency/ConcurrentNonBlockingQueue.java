@@ -1,4 +1,4 @@
-package com.leetcode.concurrent;
+package concurrency;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
