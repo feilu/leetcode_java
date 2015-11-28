@@ -4,12 +4,14 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
-public class BinaryTreeInOrderIterator implements Iterator<TreeNode> {
+public class BinaryTreePostOrderIterator implements Iterator<TreeNode> {
+
     private Deque<TreeNode> stack;
     private TreeNode node;
+    private TreeNode lastVisitedNode = null;
 
-    public BinaryTreeInOrderIterator(TreeNode root) {
-        stack = new ArrayDeque<TreeNode>();
+    public BinaryTreePostOrderIterator(TreeNode root) {
+        stack = new ArrayDeque<>();
         node = root;
     }
 
@@ -26,9 +28,15 @@ public class BinaryTreeInOrderIterator implements Iterator<TreeNode> {
                 stack.push(node);
                 node = node.left;
             } else {
-                current = stack.pop();
-                node = current.right;
-                break;
+                TreeNode peek = stack.peek();
+                if (peek.right != null && peek.right != lastVisitedNode) {
+                    // visit right subtree
+                    node = peek.right;
+                } else {
+                    current = stack.pop();
+                    lastVisitedNode = current;
+                    break;
+                }
             }
         }
         return current;
@@ -49,11 +57,13 @@ public class BinaryTreeInOrderIterator implements Iterator<TreeNode> {
         n.left = a;
         n.right = b;
         a.left = c;
-        b.left = d;
+        b.right = d;
 
-        BinaryTreeInOrderIterator iter = new BinaryTreeInOrderIterator(n);
+        BinaryTreePostOrderIterator iter = new BinaryTreePostOrderIterator(n);
         while (iter.hasNext()) {
             System.out.println(iter.next());
         }
+
     }
+
 }

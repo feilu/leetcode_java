@@ -6,6 +6,8 @@ import java.util.List;
 /**
  * https://oj.leetcode.com/problems/n-queens/
  * 
+ * assume that duplicates do not exist in the tree. this is important
+ * 
  * @author flu
  * 
  */

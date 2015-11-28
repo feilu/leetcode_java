@@ -47,14 +47,14 @@ public class FactorCombination {
                 current.add(i);
                 getFactor(target / i, i, current, result);
 
-                // pop the last item (largest), before the next loop.
+                // remove i from the current solution and start from i+1 in the next loop, or exit.
                 current.remove(current.size() - 1);
             }
         }
     }
 
     public static void main(String[] args) {
-        int a = 32;
+        int a = 36;
         new FactorCombination().print(a);
     }
 }
